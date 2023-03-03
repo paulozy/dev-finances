@@ -36,7 +36,7 @@ export function MoneyInfo({
   return (
     <>
       <div
-        className={`w-[250px] h-[130px] bg-${color}-${intensity} rounded-lg p-5 shadow-md fle flex-col`}
+        className={`w-[250px] h-[130px] bg-${color}-${intensity} bg-green-700 rounded-lg p-5 shadow-md fle flex-col`}
       >
         <header className="flex items-center justify-between">
           <span className={`${colorText} font-semibold`}>{title}</span>

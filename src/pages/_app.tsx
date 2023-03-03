@@ -1,6 +1,6 @@
 import { AppProvider } from '@/context'
+import { trpc } from '@/shared/utils/trpc'
 import '@/styles/globals.css'
-import { trpc } from '@/utils/trpc'
 import { SessionProvider } from 'next-auth/react'
 import type { AppProps, AppType } from 'next/app'
 

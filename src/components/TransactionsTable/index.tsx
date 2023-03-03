@@ -18,6 +18,7 @@ export function TransactionsTable() {
         <section className="w-full">
           {transactions.map((transaction: any) => (
             <Transaction
+              id={transaction.id}
               key={transaction.id}
               type={transaction.type}
               description={transaction.description}
