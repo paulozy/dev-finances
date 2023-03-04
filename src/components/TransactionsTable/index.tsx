@@ -11,7 +11,7 @@ export function TransactionsTable({
 }: TransactionsTableProps) {
   return (
     <div className="w-full overflow-y-auto ">
-      <header className="flex items-center justify-between bg-white px-8 py-4 rounded-t-md mt-8 text-zinc-500 sticky">
+      <header className="flex items-center justify-between bg-white px-8 py-4 rounded-t-md mt-8 text-zinc-500 sticky xsm:w-[450px]">
         <div>Descrição</div>
         <div>Valor</div>
         <div>Data</div>

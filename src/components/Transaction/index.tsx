@@ -44,7 +44,7 @@ export function Transaction({
   }
 
   return (
-    <div className="flex items-center justify-between px-8 py-4 font-medium text-zinc-700 bg-white mt-2">
+    <div className="flex items-center justify-between px-8 py-4 font-medium text-zinc-700 bg-white mt-2 xsm:w-[450px]">
       <div>{description}</div>
       <div className={`${expense}`}>R$ {valueFormatted}</div>
       <div>{formattedDate}</div>

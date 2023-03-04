@@ -14,6 +14,10 @@ module.exports = {
         "primary": "#2D4A22",
         "dash": "#F0F2F5",
         'info': '#2196F3',
+      },
+      screens: {
+        'md': '820px',
+        'sm': '560px'
       }
     },
   },
