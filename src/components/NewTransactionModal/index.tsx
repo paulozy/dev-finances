@@ -1,14 +1,17 @@
-import { AppContext } from '@/context'
 import { trpc } from '@/shared/utils/trpc'
 import * as Dialog from '@radix-ui/react-dialog'
 import { useSession } from 'next-auth/react'
-import { useContext } from 'react'
 import { v4 as uuid } from 'uuid'
 
-export function NewTransactionModal() {
+interface NewTransactionModalProps {
+  setTransactions: React.Dispatch<React.SetStateAction<ITransaction[]>>
+}
+
+export function NewTransactionModal({
+  setTransactions,
+}: NewTransactionModalProps) {
   const { data: session } = useSession()
   const mutation = trpc.createTransaction.useMutation()
-  const { setTransactions } = useContext(AppContext)
 
   function createTransaction(event: any) {
     event.preventDefault()

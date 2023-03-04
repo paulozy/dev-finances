@@ -1,6 +1,4 @@
-import { AppContext } from '@/context'
 import { trpc } from '@/shared/utils/trpc'
-import { useContext } from 'react'
 import { AiOutlineMinusCircle } from 'react-icons/ai'
 
 interface TransactionProps {
@@ -9,6 +7,7 @@ interface TransactionProps {
   value: number
   date: string
   id: string
+  setTransactions: React.Dispatch<React.SetStateAction<ITransaction[]>>
 }
 
 export function Transaction({
@@ -17,6 +16,7 @@ export function Transaction({
   date,
   type,
   id,
+  setTransactions,
 }: TransactionProps) {
   const expense = type === 'expense' ? 'text-red-500' : 'text-green-500'
 
@@ -29,13 +29,10 @@ export function Transaction({
     minimumFractionDigits: 2,
   })
 
-  const { setTransactions } = useContext(AppContext)
   const mutation = trpc.deleteTransaction.useMutation()
 
   function handleDeleteTransaction() {
     try {
-      console.log(id)
-
       mutation.mutate({ id })
 
       setTransactions((prev) =>

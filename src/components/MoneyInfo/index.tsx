@@ -30,23 +30,39 @@ export function MoneyInfo({
     minimumFractionDigits: 2,
   })
 
-  const intensity = color !== 'green' ? '50' : '700'
   const colorText = color !== 'green' ? 'text-zinc-800' : 'text-zinc-50'
+
+  const totalCard = color === 'green'
 
   return (
     <>
-      <div
-        className={`w-[250px] h-[130px] bg-${color}-${intensity} bg-green-700 rounded-lg p-5 shadow-md fle flex-col`}
-      >
-        <header className="flex items-center justify-between">
-          <span className={`${colorText} font-semibold`}>{title}</span>
-          {Icon}
-        </header>
+      {totalCard ? (
+        <div
+          className={`w-[250px] h-[130px] bg-green-700 rounded-lg p-5 shadow-md fle flex-col`}
+        >
+          <header className="flex items-center justify-between">
+            <span className={`${colorText} font-semibold`}>{title}</span>
+            {Icon}
+          </header>
 
-        <p className={`text-3xl ${colorText} mt-6 font-normal`}>
-          R$ {valueFormatted}
-        </p>
-      </div>
+          <p className={`text-3xl ${colorText} mt-6 font-normal`}>
+            R$ {valueFormatted}
+          </p>
+        </div>
+      ) : (
+        <div
+          className={`w-[250px] h-[130px] bg-zinc-50  rounded-lg p-5 shadow-md fle flex-col`}
+        >
+          <header className="flex items-center justify-between">
+            <span className={`${colorText} font-semibold`}>{title}</span>
+            {Icon}
+          </header>
+
+          <p className={`text-3xl ${colorText} mt-6 font-normal`}>
+            R$ {valueFormatted}
+          </p>
+        </div>
+      )}
     </>
   )
 }

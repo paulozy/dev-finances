@@ -11,10 +11,7 @@ export const AppContext = React.createContext<AppContext>({} as AppContext)
 
 export function AppProvider(props: PropsWithChildren) {
   const [transactions, setTransactions] = useState<ITransaction[]>([])
-
-  const { data: session } = useSession({
-    required: true,
-  })
+  const { data: session } = useSession()
 
   const owner = session?.user!.email
 
@@ -36,6 +33,8 @@ export function AppProvider(props: PropsWithChildren) {
   }
 
   useEffect(() => {
+    console.log(owner)
+
     if (owner) {
       getTransactions()
     }

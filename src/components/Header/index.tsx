@@ -1,13 +1,13 @@
-import { AppContext } from '@/context'
 import Image from 'next/image'
-import { useContext } from 'react'
 import Logo from '../../assets/logo.svg'
 
 import { MoneyInfo } from '../MoneyInfo'
 
-export function Header() {
-  const { transactions } = useContext(AppContext)
+interface HeaderProps {
+  transactions: ITransaction[]
+}
 
+export function Header({ transactions }: HeaderProps) {
   const incomes = transactions.reduce((acc, transaction) => {
     if (transaction.type === 'income') {
       return acc + transaction.value
