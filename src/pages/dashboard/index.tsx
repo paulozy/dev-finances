@@ -37,7 +37,7 @@ export default function Dashboard() {
     <div className="w-[100vw] h-[100vh] bg-dash flex flex-col items-center">
       <Header transactions={transactions} />
 
-      <div className="flex flex-col items-center overflow-x-auto w-[800px] mt-[70px] overflow-hidden md:w-[540px] xsm:w-[300px]">
+      <div className="flex flex-col items-center justify-center overflow-x-auto w-[800px] mt-[70px] overflow-hidden xs:w-[340px] xsm:w-[350px] md:w-[800px]">
         <NewTransactionModal setTransactions={setTransactions} />
         <TransactionsTable
           transactions={transactions}

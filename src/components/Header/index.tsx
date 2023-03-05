@@ -29,7 +29,7 @@ export function Header({ transactions }: HeaderProps) {
   return (
     <header className="bg-primary w-full flex flex-col items-center p-6">
       <Image src={Logo} width={200} height={100} alt="" />
-      <div className="grid grid-cols-3 gap-6 mt-10 mb-[-60px] md:grid-cols-2 md:last:grid-span-2 sm:grid-cols-1 xsm:grid-cols-1">
+      <div className="grid grid-cols-3 gap-6 mt-10 mb-[-60px] xs:grid-cols-1 xs:w-full sm:grid-cols-1 sm:w-full">
         <MoneyInfo title="Entradas" value={incomes} icon="income" />
         <MoneyInfo title="Saídas" value={expenses} icon="expense" />
         <MoneyInfo title="Total" value={total} color="green" icon="total" />

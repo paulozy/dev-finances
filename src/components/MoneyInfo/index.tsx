@@ -38,7 +38,7 @@ export function MoneyInfo({
     <>
       {totalCard ? (
         <div
-          className={`w-[250px] h-[130px] bg-green-700 rounded-lg p-5 shadow-md fle flex-col sm:w-[350px]`}
+          className={`w-[250px] h-[130px] bg-green-700 rounded-lg p-5 shadow-md fle flex-col xs:w-full sm:w-full`}
         >
           <header className="flex items-center justify-between">
             <span className={`${colorText} font-semibold`}>{title}</span>
@@ -51,7 +51,7 @@ export function MoneyInfo({
         </div>
       ) : (
         <div
-          className={`w-[250px] h-[130px] bg-zinc-50  rounded-lg p-5 shadow-md fle flex-col sm:w-[350px]`}
+          className={`w-[250px] h-[130px] bg-zinc-50  rounded-lg p-5 shadow-md fle flex-col xs:w-full sm:w-full`}
         >
           <header className="flex items-center justify-between">
             <span className={`${colorText} font-semibold`}>{title}</span>

@@ -16,8 +16,10 @@ module.exports = {
         'info': '#2196F3',
       },
       screens: {
-        'md': '820px',
-        'sm': '560px'
+        'xs': { max: '360px' },
+        'xsm': { max: '480px' },
+        'sm': { max: '640px' },
+        'md': { max: '820px' },
       }
     },
   },

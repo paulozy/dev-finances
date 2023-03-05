@@ -50,10 +50,10 @@ export function NewTransactionModal({
 
       <Dialog.Portal>
         <Dialog.Overlay className="bg-black opacity-40 data-[state=open]:animate-overlayShow fixed inset-0" />
-        <Dialog.Content className="p-[2.4rem] rounded-lg data-[state=open]:animate-contentSho w fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-dash">
+        <Dialog.Content className="p-[2.4rem] xs:p-4 rounded-lg data-[state=open]:animate-contentSho w fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-dash">
           <Dialog.Title className="text-2xl">Nova Transação</Dialog.Title>
           <form
-            className="w-max-[500px]"
+            className="w-max-[500px] xs:w-[300px]"
             onSubmit={(e) => createTransaction(e)}
           >
             <div className="mt-3">

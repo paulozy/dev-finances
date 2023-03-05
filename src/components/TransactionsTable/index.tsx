@@ -11,14 +11,14 @@ export function TransactionsTable({
 }: TransactionsTableProps) {
   return (
     <div className="w-full overflow-y-auto ">
-      <header className="flex items-center justify-between bg-white px-8 py-4 rounded-t-md mt-8 text-zinc-500 sticky xsm:w-[450px]">
+      <header className="flex items-center justify-between bg-white px-8 py-4 rounded-t-md mt-8 text-zinc-500 sticky xs:w-[500px] xsm:w-[600px]">
         <div>Descrição</div>
         <div>Valor</div>
         <div>Data</div>
         <div></div>
       </header>
 
-      <section className="w-full">
+      <section className="w-full last:rounded-b-md xs:w-[500px] sm:w-[700px]">
         {transactions.map((transaction: any) => (
           <Transaction
             id={transaction.id}
