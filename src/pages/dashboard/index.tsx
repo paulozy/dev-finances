@@ -2,27 +2,21 @@ import { Header } from '@/components/Header'
 import { LogoutButton } from '@/components/LogoutButton'
 import { NewTransactionModal } from '@/components/NewTransactionModal'
 import { TransactionsTable } from '@/components/TransactionsTable'
-import { supabase } from '@/shared/server/database/supabase'
+import { trpc } from '@/shared/utils/trpc'
 import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
 export default function Dashboard() {
   const [transactions, setTransactions] = useState<ITransaction[]>([])
   const { data: session } = useSession()
-  const { push } = useRouter()
+  const getTransactionsTrpc = trpc.getTransactions.useMutation()
 
   const owner = session?.user!.email
 
   async function getTransactions() {
-    const { data, error } = await supabase
-      .from('transactions')
-      .select('*')
-      .eq('owner', owner)
-
-    if (error) {
-      throw new Error(error.message)
-    }
+    const data = await getTransactionsTrpc.mutateAsync({
+      owner: owner as string,
+    })
 
     setTransactions(data as ITransaction[])
   }

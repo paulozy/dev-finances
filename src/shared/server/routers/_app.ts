@@ -3,13 +3,32 @@ import { supabase } from '../database/supabase'
 import { procedure, router } from '../trpc'
 
 export const appRouter = router({
-  getTransactions: procedure
+  getTransactionss: procedure
     .input(
       z.object({
         owner: z.string().email(),
       })
     )
     .query(async ({ input }) => {
+      const { data, error } = await supabase
+        .from('transactions')
+        .select('*')
+        .like('owner', input.owner)
+
+      if (error) {
+        console.log(error)
+      }
+
+      return data
+    }),
+
+  getTransactions: procedure
+    .input(
+      z.object({
+        owner: z.string().email(),
+      })
+    )
+    .mutation(async ({ input }) => {
       const { data, error } = await supabase
         .from('transactions')
         .select('*')
