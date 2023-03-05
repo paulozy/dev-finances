@@ -10,12 +10,15 @@ export const appRouter = router({
       })
     )
     .query(async ({ input }) => {
+      console.log("trpc", input);
+
       const { data, error } = await supabase
         .from("transactions")
         .select("*")
         .like("owner", input.owner);
 
       if (error) {
+        throw new Error();
         console.log(error);
       }
 
@@ -28,7 +31,7 @@ export const appRouter = router({
         owner: z.string().email(),
       })
     )
-    .mutation(async ({ input }) => {
+    .mutation(async ({ input, ctx }) => {
       const { data, error } = await supabase
         .from("transactions")
         .select("*")

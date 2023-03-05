@@ -9,12 +9,6 @@ interface NewTransactionModalProps {
   setTransactions: React.Dispatch<React.SetStateAction<ITransaction[]>>;
 }
 
-function oneWeekAway(date?: any) {
-  const now = new Date();
-  const inOneWeek = now.setDate(now.getDate() + 7);
-  return new Date(inOneWeek);
-}
-
 export function NewTransactionModal({
   setTransactions,
 }: NewTransactionModalProps) {
@@ -58,12 +52,11 @@ export function NewTransactionModal({
     setTransactions((prev) => [...prev, transaction]);
     setLastCreatedTransaction(transaction);
 
-    setOpen(false);
+    setOpen(true);
     window.clearTimeout(timerRef.current);
     timerRef.current = window.setTimeout(() => {
-      eventDateRef.current = oneWeekAway();
-      setOpen(true);
-    }, 100);
+      setOpen(false);
+    }, 1000);
   }
 
   function undoCreation() {
