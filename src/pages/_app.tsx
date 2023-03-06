@@ -1,4 +1,4 @@
-// import { AppProvider } from '@/context'
+import { AppProvider } from '@/context'
 import { trpc } from '@/shared/utils/trpc'
 import '@/styles/globals.css'
 import { SessionProvider } from 'next-auth/react'
@@ -10,9 +10,9 @@ const App: AppType = ({
 }: AppProps) => {
   return (
     <SessionProvider session={session}>
-      {/* <AppProvider> */}
-      <Component {...pageProps} />
-      {/* </AppProvider> */}
+      <AppProvider>
+        <Component {...pageProps} />
+      </AppProvider>
     </SessionProvider>
   )
 }

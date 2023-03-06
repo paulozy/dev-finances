@@ -2,11 +2,12 @@ import { Header } from '@/components/Header'
 import { LogoutButton } from '@/components/LogoutButton'
 import { NewTransactionModal } from '@/components/NewTransactionModal'
 import { TransactionsTable } from '@/components/TransactionsTable'
+import { AppContext } from '@/context'
 import { appRouter } from '@/shared/server/routers/_app'
 import { createProxySSGHelpers } from '@trpc/react-query/ssg'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { getSession } from 'next-auth/react'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import superjson from 'superjson'
 
 interface User {
@@ -20,6 +21,8 @@ export default function Dashboard(
 ) {
   const [transactions, setTransactions] = useState<ITransaction[]>([])
   const { transactionsData } = props
+
+  const { transactions: fds } = useContext(AppContext)
 
   async function getTransactions() {
     setTransactions(transactionsData as ITransaction[])
