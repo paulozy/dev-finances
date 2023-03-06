@@ -1,6 +1,6 @@
-import { z } from "zod";
-import { supabase } from "../database/supabase";
-import { procedure, router } from "../trpc";
+import { z } from 'zod'
+import { supabase } from '../database/supabase'
+import { procedure, router } from '../trpc'
 
 export const appRouter = router({
   getTransactionss: procedure
@@ -9,17 +9,19 @@ export const appRouter = router({
         owner: z.string().email(),
       })
     )
-    .query(async ({ input }) => {
+    .query(async ({ input, ctx }) => {
       const { data, error } = await supabase
-        .from("transactions")
-        .select("*")
-        .like("owner", input.owner);
+        .from('transactions')
+        .select('*')
+        .like('owner', input.owner)
 
       if (error) {
-        console.log(error);
+        throw new Error()
       }
 
-      return data;
+      console.log(data)
+
+      return data
     }),
 
   getTransactions: procedure
@@ -28,17 +30,17 @@ export const appRouter = router({
         owner: z.string().email(),
       })
     )
-    .mutation(async ({ input }) => {
+    .mutation(async ({ input, ctx }) => {
       const { data, error } = await supabase
-        .from("transactions")
-        .select("*")
-        .like("owner", input.owner);
+        .from('transactions')
+        .select('*')
+        .like('owner', input.owner)
 
       if (error) {
-        console.log(error);
+        console.log(error)
       }
 
-      return data;
+      return data
     }),
 
   createTransaction: procedure
@@ -54,14 +56,14 @@ export const appRouter = router({
     )
     .mutation(async ({ input }): Promise<any> => {
       const { data, error } = await supabase
-        .from("transactions")
-        .insert([input]);
+        .from('transactions')
+        .insert([input])
 
       if (error) {
-        throw new Error(error.message);
+        throw new Error(error.message)
       }
 
-      return data;
+      return data
     }),
 
   deleteTransaction: procedure
@@ -72,16 +74,16 @@ export const appRouter = router({
     )
     .mutation(async ({ input }) => {
       const { data, error } = await supabase
-        .from("transactions")
+        .from('transactions')
         .delete()
-        .eq("id", input.id);
+        .eq('id', input.id)
 
       if (error) {
-        throw new Error(error.message);
+        throw new Error(error.message)
       }
 
-      return data;
+      return data
     }),
-});
+})
 
-export type AppRouter = typeof appRouter;
+export type AppRouter = typeof appRouter
