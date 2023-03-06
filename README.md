@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a simple application about finances controll
+
+![image](https://user-images.githubusercontent.com/82914908/223159450-339a39ee-e1f4-47b3-89e8-978d11a2ba76.png)
 
 ## Getting Started
 
