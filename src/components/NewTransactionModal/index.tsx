@@ -1,43 +1,43 @@
-import { trpc } from "@/shared/utils/trpc";
-import * as Dialog from "@radix-ui/react-dialog";
-import { useSession } from "next-auth/react";
-import { v4 as uuid } from "uuid";
-import * as Toast from "@radix-ui/react-toast";
-import { useRef, useState } from "react";
+import { trpc } from '@/shared/utils/trpc'
+import * as Dialog from '@radix-ui/react-dialog'
+import * as Toast from '@radix-ui/react-toast'
+import { useSession } from 'next-auth/react'
+import { useRef, useState } from 'react'
+import { v4 as uuid } from 'uuid'
 
 interface NewTransactionModalProps {
-  setTransactions: React.Dispatch<React.SetStateAction<ITransaction[]>>;
+  setTransactions: React.Dispatch<React.SetStateAction<ITransaction[]>>
 }
 
 export function NewTransactionModal({
   setTransactions,
 }: NewTransactionModalProps) {
   const [lastCreatedTransaction, setLastCreatedTransaction] =
-    useState<ITransaction>();
-  const { data: session } = useSession();
-  const createTransactionMutation = trpc.createTransaction.useMutation();
-  const deleteTransactionMutation = trpc.deleteTransaction.useMutation();
+    useState<ITransaction>()
+  const { data: session } = useSession()
+  const createTransactionMutation = trpc.createTransaction.useMutation()
+  const deleteTransactionMutation = trpc.deleteTransaction.useMutation()
 
-  const [open, setOpen] = useState(false);
-  const eventDateRef = useRef(new Date());
-  const timerRef = useRef(0);
+  const [open, setOpen] = useState(false)
+  const eventDateRef = useRef(new Date())
+  const timerRef = useRef(0)
 
   function createTransaction(event: any) {
-    event.preventDefault();
+    event.preventDefault()
 
-    const id = uuid();
-    const value = Number(event.target.value.value);
-    const description = event.target.description.value;
-    const date = event.target.date.value;
-    const type = value < 0 ? "expense" : "income";
-    const owner = session?.user?.email;
+    const id = uuid()
+    const value = Number(event.target.value.value)
+    const description = event.target.description.value
+    const date = event.target.date.value
+    const type = event.target.type.value
+    const owner = session?.user?.email
 
-    if (!date) return alert("Insira uma data valida");
+    if (!date) return alert('Insira uma data valida')
 
     if (description.length > 35 || description.length < 3)
-      return alert("A descrição deve ter entre 3 e 35 caracteres");
+      return alert('A descrição deve ter entre 3 e 35 caracteres')
 
-    if (!value || value === 0) return alert("Insira um valor valido");
+    if (!value || value === 0) return alert('Insira um valor valido')
 
     const transaction = {
       id,
@@ -46,31 +46,31 @@ export function NewTransactionModal({
       description,
       date,
       owner: owner as string,
-    };
+    }
 
-    createTransactionMutation.mutate(transaction);
-    setTransactions((prev) => [...prev, transaction]);
-    setLastCreatedTransaction(transaction);
+    createTransactionMutation.mutate(transaction)
+    setTransactions((prev) => [...prev, transaction])
+    setLastCreatedTransaction(transaction)
 
-    setOpen(true);
-    window.clearTimeout(timerRef.current);
+    setOpen(true)
+    window.clearTimeout(timerRef.current)
     timerRef.current = window.setTimeout(() => {
-      setOpen(false);
-    }, 1000);
+      setOpen(false)
+    }, 1000)
   }
 
   function undoCreation() {
     deleteTransactionMutation.mutate({
       id: lastCreatedTransaction?.id as string,
-    });
+    })
 
     setTransactions((prev) => {
       const newTransactions = prev.filter(
         (transaction) => transaction.id !== lastCreatedTransaction?.id
-      );
+      )
 
-      return newTransactions;
-    });
+      return newTransactions
+    })
   }
 
   return (
@@ -98,7 +98,7 @@ export function NewTransactionModal({
             className="inline-flex items-center justify-center rounded font-medium text-xs px-[10px] leading-[25px] h-[25px] bg-green2 text-green11 shadow-[inset_0_0_0_1px] shadow-green7 hover:shadow-[inset_0_0_0_1px] hover:shadow-green8 focus:shadow-[0_0_0_2px] focus:shadow-green8"
             onClick={undoCreation}
           >
-            Undo
+            Desfazer
           </button>
         </Toast.Action>
       </Toast.Root>
@@ -135,6 +135,22 @@ export function NewTransactionModal({
               </div>
               <div className="mt-3">
                 <label
+                  htmlFor="type"
+                  className="absolute w-[1px] h-[1px] p-0 -m-[1px] overflow-hidden whitespace-nowrap"
+                >
+                  Tipo
+                </label>
+                <select
+                  name="type"
+                  id="type"
+                  className="border-none rounded-[0.2rem] p-3 w-full"
+                >
+                  <option value="income">Receita</option>
+                  <option value="expense">Despesa</option>
+                </select>
+              </div>
+              <div className="mt-3">
+                <label
                   htmlFor="value"
                   className="absolute w-[1px] h-[1px] p-0 -m-[1px] overflow-hidden whitespace-nowrap"
                 >
@@ -163,7 +179,7 @@ export function NewTransactionModal({
                   type="date"
                   placeholder="dd/mm/aaaa"
                   id="date"
-                  className="border-none rounded-[0.2rem] p-3 w-full"
+                  className="border-none rounded-[0.2rem] p-3 w-full xs:border-solid border-green-700 border-2"
                 />
               </div>
 
@@ -186,5 +202,5 @@ export function NewTransactionModal({
         </Dialog.Portal>
       </Dialog.Root>
     </Toast.Provider>
-  );
+  )
 }
