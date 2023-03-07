@@ -30,6 +30,9 @@ export function NewTransactionModal({
     const description = event.target.description.value
     const date = event.target.date.value
     const type = event.target.type.value
+
+    console.log(type)
+
     const owner = session?.user?.email
 
     if (!date) return alert('Insira uma data valida')
